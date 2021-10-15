@@ -6,11 +6,12 @@ import { auth, sendPasswordResetEmail } from "../firebase/firebase";
 import "./login_stylesheets/Reset.css";
 function Reset() {
   const [email, setEmail] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const history = useHistory();
   useEffect(() => {
     if (loading) return;
     if (user) history.replace("/dashboard");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
   return (
     <div className="reset">

@@ -7,7 +7,7 @@ import './login_stylesheets/Login.css'
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const history = useHistory();
     useEffect(() => {
       if (loading) {
@@ -15,6 +15,7 @@ function Login() {
         return;
       }
       if (user) history.replace("/dashboard");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, loading]);
     return (
       <div className="login">
