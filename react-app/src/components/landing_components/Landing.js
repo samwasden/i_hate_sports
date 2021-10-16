@@ -10,7 +10,10 @@ export default function Landing() {
     return (
         <div className='landing'>
             <div className='panel' id='information'>
-
+                <div id='title_container'>
+                    <h1>Sports Suck.</h1>
+                    <h2>and we won't let you forget it.</h2>
+                </div>
             </div>
             {login ? (reset ? <Reset setlogin={setlogin} setreset={setreset} /> : <Login setlogin={setlogin} setreset={setreset} />) : <Register setlogin={setlogin}/>}
         </div>

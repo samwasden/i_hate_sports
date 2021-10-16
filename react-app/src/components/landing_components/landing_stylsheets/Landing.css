@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'RobotoMono';
+    src: url('../../../content/fonts/RobotoMono-VariableFont_wght.ttf');
+}
+
 .landing {
     display: flex;
     justify-content: space-evenly;
@@ -9,4 +14,26 @@
 
 #information {
     width: 70vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00000080;
+}
+
+#title_container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    color: white;
+    font-family: 'RobotoMono';
+}
+
+#title_container h1 {
+    font-size: 3rem;
+}
+
+#title_container h2 { 
+    font-size: 2rem;
 }
