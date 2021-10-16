@@ -1,9 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from './components/login_components/Login';
-import Register from './components/login_components/Register';
-import Reset from './components/login_components/Reset';
-import Dashboard from './components/Dashboard';
+import Home from './components/homepage_components/Home';
+import Landing from './components/landing_components/Landing';
 
 
 function App() {
@@ -11,10 +9,8 @@ function App() {
     <div className="app">
       <Router>
         <Switch>
-        <Route exact path="/" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/reset" component={Reset} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/home" component={Home} />
         </Switch>
       </Router>
     </div>
