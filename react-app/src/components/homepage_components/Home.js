@@ -15,7 +15,6 @@ export default function Home() {
     useEffect(() => {
       if (loading) return;
       if (!user) return history.replace("/");
-      
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, loading]);
 
@@ -23,7 +22,7 @@ export default function Home() {
 
     return (
         <div className='home'>
-            <Header user={user}/>
+            <Header user={user} />
             <Footer />
         </div>
     )

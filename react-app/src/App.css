@@ -1,3 +1,4 @@
 * {
     font-family: 'RobotoMono';
+    overscroll-behavior: none;
 }

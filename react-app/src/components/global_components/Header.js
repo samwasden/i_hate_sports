@@ -5,13 +5,23 @@ import settings_icon from '../../content/icons/settings_icon.png'
 import close_icon from '../../content/icons/close_icon.png'
 
 
-export default function Header({user}) {
+export default function Header({user, header}) {
     const [dashboard, setdashboard] = useState(false)
 
     return (
         <div className='header'>
-            <div className='header_panel'>
-
+            <div className='header_panel' id='nav_panel'>
+                <div id='navbar'>
+                    <button className='nav_button'>
+                        my teams
+                    </button>
+                    <button className='nav_button'>
+                        schedule
+                    </button>
+                    <button className='nav_button'>
+                        browse teams
+                    </button>
+                </div>
             </div>
             <div className='header_title'>
                 <h1>sports suck.</h1>

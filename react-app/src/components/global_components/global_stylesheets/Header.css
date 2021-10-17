@@ -1,8 +1,11 @@
 .header {
+    position: fixed;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 15vh;
+    height: 10vh;
+    color: white;
+    background: #00000080;
 }
 
 .header_title {
@@ -17,6 +20,8 @@
     justify-content: center;
     align-items: center;
     width: 40vw;
+    color: white;
+    height: inherit;
 }
 
 #account_panel {
@@ -25,10 +30,13 @@
 
 #settings_icon {
     width: 1.5vw;
+    filter: invert(1);
+
 }
 
 #close_icon {
     width: 1.3vw;
+    filter: invert(1);
 }
 
 #close_button {
@@ -39,6 +47,7 @@
     border: none;
     outline: none;
     width: 4vw;
+    color: white;
 }
 
 #settings_button {
@@ -50,6 +59,7 @@
     border: none;
     outline: none;
     width: 10vw;
+    color: white;
 }
 #settings_button:hover {
     text-decoration: underline;
@@ -58,6 +68,26 @@
     animation: spin ease-in-out;
     animation-duration: 4000ms;
     animation-duration: infinite;
+}
+
+#nav_panel {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.nav_button {
+    text-align: center;
+    font-size: 1rem;
+    width: auto;
+    padding: 2vw;
+    background: none;
+    border: none;
+    color: white;
+}
+
+.nav_button:hover {
+    text-decoration: underline;
 }
 
 @keyframes spin { 

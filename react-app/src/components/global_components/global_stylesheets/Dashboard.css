@@ -7,21 +7,20 @@
 
 .dashboard_container {
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   flex-direction: column;
   text-align: center;
-  background-color: #00000080;
-  padding: 30px;
+  padding: 0 2vw;
   color: white;
+  height: inherit;
 }
 
 .dashboard_btn {
-  padding: 10px;
-  font-size: 18px;
-  margin-top: 10px;
+  padding: 4px;
+  font-size: 1rem;
+  text-decoration: underline;
   border: none;
   color: white;
-  background-color: black;
-}
-.dashboard div {
-  margin-top: 7px;
+  background: none;
 }
