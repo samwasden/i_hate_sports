@@ -1,13 +1,13 @@
 import firebase from "firebase";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCHLswYnDE3L4evHBcqISRAVEuV-b9Z2G0",
-    authDomain: "sportssuck-f8d45.firebaseapp.com",
-    projectId: "sportssuck-f8d45",
-    storageBucket: "sportssuck-f8d45.appspot.com",
-    messagingSenderId: "35385192686",
-    appId: "1:35385192686:web:ff01bdadea69a67b60c3ff",
-    measurementId: "G-JV8DRH27SZ"
+  apiKey: 'AIzaSyCHLswYnDE3L4evHBcqISRAVEuV-b9Z2G0',
+  authDomain: "sportssuck-f8d45.firebaseapp.com",
+  projectId: "sportssuck-f8d45",
+  storageBucket: "sportssuck-f8d45.appspot.com",
+  messagingSenderId: "35385192686",
+  appId: "1:35385192686:web:ff01bdadea69a67b60c3ff",
+  measurementId: "G-JV8DRH27SZ"
 };
 
 const app = firebase.initializeApp(firebaseConfig);

@@ -10,7 +10,6 @@ export default function Home() {
 
     const [user, loading] = useAuthState(auth);
     const history = useHistory();
-  
     
     useEffect(() => {
       if (loading) return;

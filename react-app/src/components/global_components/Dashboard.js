@@ -5,6 +5,7 @@ import './global_stylesheets/Dashboard.css'
 
 function Dashboard({user}) {
 
+
   return (
     <div className='dashboard'>
       <div className="dashboard_container">
