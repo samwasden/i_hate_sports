@@ -18,8 +18,6 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, loading]);
 
-    console.log(user)
-
     return (
         <div className='home'>
             <Header user={user} />

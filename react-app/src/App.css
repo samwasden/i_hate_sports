@@ -2,3 +2,10 @@
     font-family: 'RobotoMono';
     overscroll-behavior: none;
 }
+
+.page_content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10vh;
+}
