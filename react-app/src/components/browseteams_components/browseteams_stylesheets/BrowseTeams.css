@@ -66,6 +66,7 @@
     flex-direction: column;
     border: 2px solid white;
     padding: 40px;
+    width: 20vw;
 }
 
 .clickedlistbutton {

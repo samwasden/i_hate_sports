@@ -8,6 +8,7 @@ import List from './List';
 import './browseteams_stylesheets/BrowseTeams.css'
 import filledIcon from '../../content/icons/remove_icon_filled.png'
 import outlineIcon from '../../content/icons/add_icon_outline.png'
+import AddTeam from './AddTeam';
 
 export default function BrowseTeams() {
 
@@ -30,6 +31,7 @@ export default function BrowseTeams() {
         valid: false,
         teamname: '',
         liked: true,
+        rating: 0
     })
     
     useEffect(() => {
@@ -62,16 +64,7 @@ export default function BrowseTeams() {
                     <button className='listbutton' onClick={() => setvisable({tennis: !visable.tennis})}><img src={visable.tennis ? filledIcon : outlineIcon} alt='+' />Tennis</button>
                     {visable.tennis ? <List names={['Australian Open', 'French Open', 'US Open', 'Wimbledon']} sport={'tennis'} list={['tennis-atp-australian-open-men-singles-qual', 'tennis-atp-french-open-men-singles', 'tennis-atp-us-open-men-singles', 'tennis-atp-wimbledon-men-s-singles']} setform={setform} form={form}/> : null}
                 </div>
-                {form.valid ? 
-                <div className='team_form'>
-                    <h1>{form.teamname}</h1>
-                    <div onChange={(e) => setform({...form, liked: e.target.value})}>
-                        <input type='radio' value={true} name='opinion' /> I like this team
-                        <input type='radio' value={false} name='opinion' /> I don't like this team
-                    </div>
-                    {form.liked ? <h4>How much do you like this team?</h4> : <h4>How much do you hate this team?</h4>}
-
-                </div> : null }
+                {form.valid ? <AddTeam setform={setform} form={form}/> : null }
             </div>
             <Footer />
         </div>
