@@ -1,11 +1,32 @@
 * {
     font-family: 'RobotoMono';
     overscroll-behavior: none;
+    color: white;
+}
+
+.page {
+    background: linear-gradient(0deg, #2D3440 0%, #1f242c 100%), linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgb(255, 255, 255) 100%);
 }
 
 .page_content {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-direction: column;
     padding-top: 10vh;
+    min-height: 90vh;
+}
+
+.styled_button {
+    background: none;
+    border: 2px solid white;
+    color: white;
+    outline: none;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+.styled_button:hover {
+    background: white;
+    color: #2D3440;
 }

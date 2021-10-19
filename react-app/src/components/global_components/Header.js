@@ -6,24 +6,21 @@ import close_icon from '../../content/icons/close_icon.png'
 import { Link } from 'react-router-dom'
 
 
-export default function Header({user, header}) {
+export default function Header({user}) {
     const [dashboard, setdashboard] = useState(false)
 
     return (
         <div className='header'>
             <div className='header_panel' id='nav_panel'>
                 <div id='navbar'>
+                    <Link to='/home' className='nav_button'>
+                        dashboard
+                    </Link>
                     <Link to='/myteams' className='nav_button'>
                         my teams
                     </Link>
-                    <button className='nav_button'>
-                        schedule
-                    </button>
-                    <button className='nav_button'>
+                    <Link to='/browseteams' className='nav_button'>
                         browse teams
-                    </button>
-                    <Link to='/home' className='nav_button'>
-                        dashboard
                     </Link>
                 </div>
             </div>

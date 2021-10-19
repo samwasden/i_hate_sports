@@ -1,0 +1,79 @@
+#all_teams_list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 90vw;
+    padding: 5vh 5vw;
+}
+
+.listbutton {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: .5rem;
+}
+.listbutton:hover {
+    text-decoration: underline;
+}
+
+.league .listbutton {
+    margin-left: 2vw;
+}
+
+.teams .listbutton {
+    margin-left: 4vw;
+}
+
+.listbutton img {
+    height: 1rem;
+    filter: invert(1);
+    margin-right: 5px;
+}
+
+.teams {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.team_names {
+    margin-left: 4vw;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+.add_team {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 60vw;
+}
+
+.team_form {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 40vh;
+    position: fixed;
+    left: 60vw;
+    top: 30vh;
+    flex-direction: column;
+    border: 2px solid white;
+    padding: 40px;
+}
+
+.clickedlistbutton {
+    text-decoration: underline;
+    margin-left: 4vw;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: .5rem;
+}

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Header from '../global_components/Header'
-import { addTeam } from '../firebase/team_management'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useHistory } from 'react-router';
 import { auth } from '../firebase/firebase';
+import './myteams_stylesheets/MyTeams.css'
+import Footer from '../global_components/Footer'
+import { Link } from 'react-router-dom';
 
 export default function MyTeams() {
-
-    const [input, setinput] = useState('')
 
     const [user, loading] = useAuthState(auth);
     const history = useHistory();
@@ -20,12 +20,11 @@ export default function MyTeams() {
     }, [user, loading]);
 
     return (
-        <div>
-            <Header />
+        <div id='MyTeams' className='page'>
+            <Header user={user}/>
             <div className='page_content'>
-                <input onChange={(e) => setinput(e.target.value)}/>
-                <div>
-                    <button onClick={() => addTeam(user, {input})}>add more teams</button>
+                <div id='addteams_box'>
+                    <Link to='/browseteams' className='styled_button'>add/remove teams</Link>
                 </div>
                 <div id='liked_teams' className='team_list'>
 
@@ -34,6 +33,7 @@ export default function MyTeams() {
 
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

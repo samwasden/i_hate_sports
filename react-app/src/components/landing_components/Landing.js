@@ -8,7 +8,7 @@ export default function Landing() {
     const [login, setlogin] = useState(true)
     const [reset, setreset] = useState(false)
     return (
-        <div className='landing'>
+        <div id='landing' className='page'>
             <div className='panel' id='information'>
                 <div id='title_container'>
                     <h1>Sports Suck.</h1>

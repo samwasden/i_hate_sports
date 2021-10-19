@@ -1,6 +1,7 @@
-#home {
+#addteams_box {
     display: flex;
+    width: 90vw;
+    padding: 5vh 5vw;
     justify-content: flex-start;
     align-items: center;
-    flex-direction: column;
 }

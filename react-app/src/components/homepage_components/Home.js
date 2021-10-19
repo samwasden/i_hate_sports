@@ -18,8 +18,11 @@ export default function Home() {
     }, [user, loading]);
 
     return (
-        <div className='home'>
+        <div className='page' id='home'>
             <Header user={user} />
+            <div className='page_content'>
+
+            </div>
             <Footer />
         </div>
     )
