@@ -1,5 +1,10 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('./content/fonts/Roboto-Regular.ttf');
+}
+
 * {
-    font-family: 'RobotoMono';
+    font-family: 'Roboto';
     overscroll-behavior: none;
     color: white;
 }

@@ -1,12 +1,12 @@
 import React from 'react'
 import League from './League'
 
-export default function List({names, sport, list, setform, form}) {
+export default function List({names, sport, list, setform, form, setliked}) {
 
     return (
         <div className='list'>
             {names.map((leaguename, index) => {
-                return <League key={index} sport={sport} leaguename={leaguename} league={list[index]} setform={setform} form={form}/> 
+                return <League key={index} sport={sport} leaguename={leaguename} league={list[index]} setform={setform} form={form} setliked={setliked}/> 
             })}
         </div>
     )

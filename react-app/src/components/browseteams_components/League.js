@@ -4,7 +4,7 @@ import Teams from './Teams'
 import filledIcon from '../../content/icons/remove_icon_filled.png'
 import outlineIcon from '../../content/icons/add_icon_outline.png'
 
-export default function League({leaguename, sport, league, setform}) {
+export default function League({leaguename, sport, league, setform, setliked}) {
 
     const [teamnames, setteamnames] = useState([])
 
@@ -16,7 +16,7 @@ export default function League({leaguename, sport, league, setform}) {
                 setteamnames(getTeamNames(sport, league))
                 setvisable(!visable)
                 }}><img src={visable ? filledIcon : outlineIcon} alt='+' />{leaguename}</button>
-            {visable ? <Teams teamnames={teamnames} setform={setform}/> : null}
+            {visable ? <Teams teamnames={teamnames} setform={setform} setliked={setliked}/> : null}
         </div>
     )
 }

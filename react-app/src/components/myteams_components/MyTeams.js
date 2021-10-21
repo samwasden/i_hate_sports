@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { auth } from '../firebase/firebase';
 import './myteams_stylesheets/MyTeams.css'
 import Footer from '../global_components/Footer'
+import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export default function MyTeams() {
@@ -24,7 +25,9 @@ export default function MyTeams() {
             <Header user={user}/>
             <div className='page_content'>
                 <div id='addteams_box'>
-                    <Link to='/browseteams' className='styled_button'>add/remove teams</Link>
+                    <Link to='/browseTeams'>
+                        <Button sx={{color: 'white', border: '2px solid white', ':hover': {backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '2px solid white'}}} variant='outlined'>ADD TEAMS</Button>
+                    </Link>
                 </div>
                 <div id='liked_teams' className='team_list'>
 
