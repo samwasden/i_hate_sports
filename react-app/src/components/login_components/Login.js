@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase/firebase";
+import { appAuth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import './login_stylesheets/Login.css'
+import { Button, TextField, FormLabel, FormGroup, Box } from "@mui/material";
+import {Theme} from "../global_components/Theme";
+import { ThemeProvider } from "@emotion/react";
+
 
 function Login(props) {
     const {setlogin, setreset} = props
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, loading] = useAuthState(auth);
+    const [user, loading] = useAuthState(appAuth);
     const history = useHistory();
     useEffect(() => {
       if (loading) {
@@ -20,44 +24,64 @@ function Login(props) {
     }, [user, loading]);
     return (
       <div className="login_panel">
-        <div className="login_container">
-          <input
-            type="text"
+        <ThemeProvider theme={Theme}>
+        <FormGroup className="template_container" id='login_container'>
+          <TextField
+            type={email}
+            variant="outlined"
             className="login_textBox"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="E-mail Address"
+            label="Email"
+            InputProps={{ style: { color: "white" } }}
           />
-          <input
-            type="password"
+          <TextField
+            type='password'
+            variant="outlined"
             className="login_textBox"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            label="Password"
+            InputProps={{ style: { color: "white" } }}
           />
-          <button
+          <Button
+            variant='contained'
             className="login_btn"
             onClick={() => signInWithEmailAndPassword(email, password)}
           >
             Login
-          </button>
-          <button className="login_btn login_google" onClick={signInWithGoogle}>
+          </Button>
+          <Button 
+            variant='outlined'
+            className="login_btn login_google" 
+            onClick={signInWithGoogle}>
             Login with Google
-          </button>
+          </Button>
           <div>
-            <button className='login_link' onClick={(e) => {
-              e.preventDefault()
-              setreset(true)
-            }}>Forgot Password</button>
+            <Button 
+              variant='text'
+              className='login_link' 
+              onClick={(e) => {
+                e.preventDefault()
+                setreset(true)
+              }}>
+              <Box className='login_link'>Forgot Password</Box>
+            </Button>
           </div>
-          <div className='login_prompt'>
+          <FormLabel className='login_prompt'>
             Don't have an account? 
-          </div>
-            <button className='login_link' onClick={(e) => {
+          </FormLabel>
+            <Button 
+              variant='text'
+              className='login_link' 
+              onClick={(e) => {
                 e.preventDefault()
                 setlogin(false)
-              }}>Register</button>
-        </div>
+              }}>
+              <Box className='login_link'>Register</Box>
+            </Button>
+        </FormGroup>
+        </ThemeProvider>
       </div>
     );
   }

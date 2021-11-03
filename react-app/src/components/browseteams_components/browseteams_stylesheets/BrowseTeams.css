@@ -1,21 +1,28 @@
+.browse_teams_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100vw;
+}
+
 #all_teams_list {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    width: 90vw;
+    width: 20vw;
     padding: 5vh 5vw;
+    margin: 5vh 7.5vw;
+    background: #ffffff27;
 }
 
 .listbutton {
+    size: 2rem;
     background: none;
     border: none;
     color: white;
-    font-size: 1rem;
+    font-size: 2rem;
     padding: .5rem;
-}
-.listbutton:hover {
-    text-decoration: underline;
 }
 
 .league .listbutton {
@@ -26,7 +33,7 @@
     margin-left: 4vw;
 }
 
-.listbutton img {
+.button_image {
     height: 1rem;
     filter: invert(1);
     margin-right: 5px;
@@ -56,18 +63,25 @@
 }
 
 .team_form {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 40vh;
     position: fixed;
     left: 60vw;
     top: 30vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     flex-direction: column;
-    border: 2px solid white;
-    padding: 30px;
+    height: 40vh;
     width: 20vw;
-    border-radius: 4px;
+    padding: 3vh 2vw;
+    background: #ffffff27;
+}
+
+#liked_team_form .button_box #submit_team_button {
+    background: #82ca9d;
+}
+
+#hated_team_form .button_box #submit_team_button {
+    background: #FF8042;
 }
 
 .clickedlistbutton {
@@ -78,15 +92,6 @@
     color: white;
     font-size: 1rem;
     padding: .5rem;
-}
-
-.form_title {
-    margin-bottom: 10%;
-}
-
-.form_label {
-    margin-bottom: 5%;
-    margin-top: 15%;
 }
 
 .rating_box {
@@ -100,3 +105,36 @@
     width: 10vw;
     justify-content: space-between;
 }
+
+.team_name_box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.button_text {
+    font-size: 1rem;
+}
+
+.form_info {
+    text-align: center;
+    width: 80%;
+}
+
+.dividing_line {
+    height: 1px;
+    width: 80%;
+    /* background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255,255,255,0) 100%); */
+    background: white;
+}
+
+#info_dividing_line {
+    width: 50%;
+}
+
+#team_info_form {
+    height: 30vh;
+    width: 20vw;
+    padding: 8vh 2vw;
+}
+

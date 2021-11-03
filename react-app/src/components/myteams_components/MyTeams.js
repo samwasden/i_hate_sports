@@ -1,42 +1,71 @@
-import React, { useEffect } from 'react'
-import Header from '../global_components/Header'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useHistory } from 'react-router';
-import { auth } from '../firebase/firebase';
+import React from 'react';
 import './myteams_stylesheets/MyTeams.css'
-import Footer from '../global_components/Footer'
-import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import DisplayTeam from './DisplayTeam';
+import { Typography } from '@mui/material';
+import {Theme} from '../global_components/Theme';
+import { ThemeProvider } from '@emotion/react';
+import { Box } from '@mui/system';
 
-export default function MyTeams() {
 
-    const [user, loading] = useAuthState(auth);
-    const history = useHistory();
-  
-    
-    useEffect(() => {
-      if (loading) return;
-      if (!user) return history.replace("/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user, loading]);
+export default function MyTeams({userdata}) {
 
     return (
-        <div id='MyTeams' className='page'>
-            <Header user={user}/>
+        <div id='myTeams' className='page'>
             <div className='page_content'>
-                <div id='addteams_box'>
-                    <Link to='/browseTeams'>
-                        <Button sx={{color: 'white', border: '2px solid white', ':hover': {backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '2px solid white'}}} variant='outlined'>ADD TEAMS</Button>
-                    </Link>
-                </div>
-                <div id='liked_teams' className='team_list'>
+                <div>
+                    <ThemeProvider theme={Theme}>
+                        <Box className='teams_box'>
+                            <Box id='liked_teams' className='team_list'>
+                                <Box className='teams_header'>
+                                        <Box className='percentage_key'>
+                                            <div className='color_key'>
+                                                <div className='color_box' style={{background: '#82ca9d'}}></div>
+                                                <Typography variant='body2'>WIN</Typography>
+                                            </div>
+                                            <div className='color_key'>
+                                                <div className='color_box' style={{background: '#FFBB28'}}></div>
+                                                <Typography variant='body2'>LOSE</Typography>
+                                            </div>
+                                            <div className='color_key'>
+                                                <div className='color_box' style={{background: '#FF8042'}}></div>
+                                                <Typography variant='body2'>DRAW</Typography>
+                                            </div>
+                                        </Box>
+                                        <Typography variant='h6'>LIKED TEAMS</Typography>
+                                    </Box>
+                                {userdata.likedTeams.map((teams, index) => {
+                                    return <DisplayTeam liked={true} team={teams} key={index} />
+                                })}
+                            </Box>
+                            <Box id='hated_teams' className='team_list'>
+                                <Box className='teams_header'>
+                                    <Box className='percentage_key'>
+                                        <div className='color_key'>
+                                            <div className='color_box' style={{background: '#82ca9d'}}></div>
+                                            <Typography variant='body2'>WIN</Typography>
+                                        </div>
+                                        <div className='color_key'>
+                                            <div className='color_box' style={{background: '#FF8042'}}></div>
+                                            <Typography variant='body2'>LOSE</Typography>
+                                        </div>
+                                        <div className='color_key'>
+                                            <div className='color_box' style={{background: '#FFBB28'}}></div>
+                                            <Typography variant='body2'>DRAW</Typography>
+                                        </div>
+                                    </Box>
+                                    <Typography variant='h6'>DISLIKED TEAMS</Typography>
+                                </Box>
+                                {userdata.hatedTeams.map((teams, index) => {
+                                    return <DisplayTeam liked={false} team={teams} key={index} />
+                                })}
+                            </Box>
+                        </Box>
+                        <Box className='teams_box'>
 
-                </div>
-                <div id='hated_teams' className='team_list'>
-
+                        </Box>
+                    </ThemeProvider>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

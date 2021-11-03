@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../global_components/Header'
-import Footer from '../global_components/Footer'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase/firebase';
-import { useHistory } from 'react-router';
+import React, { useState } from 'react';
 import List from './List';
 import './browseteams_stylesheets/BrowseTeams.css'
 import filledIcon from '../../content/icons/remove_icon_filled.png'
 import outlineIcon from '../../content/icons/add_icon_outline.png'
 import AddTeam from './AddTeam';
-import { fetchUserName, fetchLikedTeams, fetchHatedTeams } from '../firebase/team_management';
+import { ThemeProvider } from '@emotion/react';
+import {Theme} from '../global_components/Theme'
+import { Button, Box } from '@mui/material';
+import AddTeamInfo from './AddTeamInfo';
 
 
-export default function BrowseTeams() {
+export default function BrowseTeams({userdata, setuserdata, getUserData}) {
 
-    const [user, loading] = useAuthState(auth);
-    const history = useHistory();
+
+    const [likedTeams, setlikedTeams] = useState(userdata.likedTeams.map(team => team.name))
+    const [hatedTeams, sethatedTeams] = useState(userdata.hatedTeams.map(team => team.name))
+    const [allTeams, setallTeams] = useState([...likedTeams, ...hatedTeams])
 
     const [visable, setvisable] = useState({
         football: false,
@@ -32,53 +32,44 @@ export default function BrowseTeams() {
     const [form, setform] = useState({
         valid: false,
         teamname: '',
-        rating: 0
+        rating: 0,
+        edit: false,
+        sport: '',
+        league: ''
     })
 
     const [liked, setliked] = useState(true);
 
-    const [userdata, setuserdata] = useState({
-        uid: user?.uid,
-        username: fetchUserName(user),
-        likedteams: fetchLikedTeams(user),
-        hatedteams: fetchHatedTeams(user)
-    })
-
-    
-    useEffect(() => {
-      if (loading) return;
-      if (!user) return history.replace("/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user, loading]);
-
 
     return (
         <div id='browseteams' className='page'>
-            <Header user={user}/>
             <div className='page_content' id='browse_teams_content'>
-                <div id='all_teams_list'>
-                    <button className='listbutton' onClick={() => setvisable({baseball: !visable.baseball})}><img src={visable.baseball ? filledIcon : outlineIcon} alt='+' />Baseball</button>
-                    {visable.baseball ? <List names={['MLB']} sport={'baseball'} list={['baseball-usa-mlb']} setform={setform} form={form} setliked={setliked}/> : null}
-                    <button className='listbutton' onClick={() => setvisable({basketball: !visable.basketball})}><img src={visable.basketball ? filledIcon : outlineIcon} alt='+' />Basketball</button>
-                    {visable.basketball ? <List names={['NCAA Basketball', 'NBA']} sport={'basketball'} list={['basketball-usa-ncaa', 'basketball-usa-nba']} setform={setform} form={form} setliked={setliked}/> : null}
-                    <button className='listbutton' onClick={() => setvisable({boxing: !visable.boxing})}><img src={visable.boxing ? filledIcon : outlineIcon} alt='+' />Boxing</button>
-                    {visable.boxing ? <List names={['Boxing']} sport={'boxing'} list={['boxing-international-matchups']} setform={setform} form={form} setliked={setliked}/> : null}
-                    <button className='listbutton' onClick={() => setvisable({football: !visable.football})}><img src={visable.football ? filledIcon : outlineIcon} alt='+' />Football</button>
-                    {visable.football ? <List names={['NCAA Football', 'NFL']} sport={'american-football'} list={['american-football-usa-ncaa', 'american-football-usa-nfl']} setform={setform} form={form} setliked={setliked}/> : null}
-                    <button className='listbutton' onClick={() => setvisable({golf: !visable.golf})}><img src={visable.golf ? filledIcon : outlineIcon} alt='+' />Golf</button>
-                    {visable.golf ? <List names={['PGA', 'Masters']} sport={'golf'} list={['golf-international-pga-tour-zozo-championship', 'golf-men-t6c71-us-masters-2022']} setform={setform} form={form} setliked={setliked}/> : null}
-                    <button className='listbutton' onClick={() => setvisable({hockey: !visable.hockey})}><img src={visable.hockey ? filledIcon : outlineIcon} alt='+' />Hockey</button>
-                    {visable.hockey ? <List names={['NHL']} sport={'ice-hockey'} list={['ice-hockey-usa-nhl']} setform={setform} form={form} setliked={setliked}/> : null}
-                    <button className='listbutton' onClick={() => setvisable({mma: !visable.mma})}><img src={visable.mma ? filledIcon : outlineIcon} alt='+' />MMA</button>
-                    {visable.mma ? <List names={['MMA']} sport={'mma'} list={['mma-international-ufc']} setform={setform} form={form} setliked={setliked}/> : null}
-                    <button className='listbutton' onClick={() => setvisable({soccer: !visable.soccer})}><img src={visable.soccer ? filledIcon : outlineIcon} alt='+' />Soccer</button>
-                    {visable.soccer ? <List names={['Premier League', 'Ligue 1', 'Bundesliga', 'Serie A', 'LaLiga', 'MLS']} sport={'soccer'} list={['soccer-england-premier-league', 'soccer-france-ligue-1', 'soccer-germany-bundesliga', 'soccer-italy-serie-a', 'soccer-spain-laliga', 'soccer-usa-major-league-soccer']} setform={setform} form={form} setliked={setliked}/> : null}
-                    <button className='listbutton' onClick={() => setvisable({tennis: !visable.tennis})}><img src={visable.tennis ? filledIcon : outlineIcon} alt='+' />Tennis</button>
-                    {visable.tennis ? <List names={['Australian Open', 'French Open', 'US Open', 'Wimbledon']} sport={'tennis'} list={['tennis-atp-australian-open-men-singles-qual', 'tennis-atp-french-open-men-singles', 'tennis-atp-us-open-men-singles', 'tennis-atp-wimbledon-men-s-singles']} setform={setform} form={form} setliked={setliked}/> : null}
+                <div className='browse_teams_container'>
+                    <ThemeProvider theme={Theme}>
+                    <Box id='all_teams_list'>
+                    <Button className='listButton' onClick={() => setvisable({baseball: !visable.baseball})}><img className='button_image' src={visable.baseball ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>Baseball</Box></Button>
+                    {visable.baseball ? <List names={['MLB']} sport={'baseball'} list={['baseball-usa-mlb']} setform={setform} form={form} setliked={setliked} setuserdata={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    <Button className='listButton' onClick={() => setvisable({basketball: !visable.basketball})}><img className='button_image' src={visable.basketball ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>Basketball</Box></Button>
+                    {visable.basketball ? <List names={['NCAA Basketball', 'NBA']} sport={'basketball'} list={['basketball-usa-ncaa', 'basketball-usa-nba']} setform={setform} form={form} setliked={setliked} setuser={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    <Button className='listButton' onClick={() => setvisable({boxing: !visable.boxing})}><img className='button_image' src={visable.boxing ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>Boxing</Box></Button>
+                    {visable.boxing ? <List names={['Boxing']} sport={'boxing'} list={['boxing-international-matchups']} setform={setform} form={form} setliked={setliked} setuser={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    <Button className='listButton' onClick={() => setvisable({football: !visable.football})}><img className='button_image' src={visable.football ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>Football</Box></Button>
+                    {visable.football ? <List names={['NCAA Football', 'NFL']} sport={'american-football'} list={['american-football-usa-ncaa', 'american-football-usa-nfl']} setform={setform} form={form} setliked={setliked} setuser={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    <Button className='listButton' onClick={() => setvisable({golf: !visable.golf})}><img className='button_image' src={visable.golf ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>Golf</Box></Button>
+                    {visable.golf ? <List names={['PGA', 'Masters']} sport={'golf'} list={['golf-international-pga-tour-zozo-championship', 'golf-men-t6c71-us-masters-2022']} setform={setform} form={form} setliked={setliked} setuser={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    <Button className='listButton' onClick={() => setvisable({hockey: !visable.hockey})}><img className='button_image' src={visable.hockey ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>Hockey</Box></Button>
+                    {visable.hockey ? <List names={['NHL']} sport={'ice-hockey'} list={['ice-hockey-usa-nhl']} setform={setform} form={form} setliked={setliked} setuser={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    <Button className='listButton' onClick={() => setvisable({mma: !visable.mma})}><img className='button_image' src={visable.mma ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>MMA</Box></Button>
+                    {visable.mma ? <List names={['MMA']} sport={'mma'} list={['mma-international-ufc']} setform={setform} form={form} setliked={setliked} setuser={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    <Button className='listButton' onClick={() => setvisable({soccer: !visable.soccer})}><img className='button_image' src={visable.soccer ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>Soccer</Box></Button>
+                    {visable.soccer ? <List names={['Premier League', 'Ligue 1', 'Bundesliga', 'Serie A', 'LaLiga', 'MLS']} sport={'soccer'} list={['soccer-england-premier-league', 'soccer-france-ligue-1', 'soccer-germany-bundesliga', 'soccer-italy-serie-a', 'soccer-spain-laliga', 'soccer-usa-major-league-soccer']} setform={setform} form={form} setliked={setliked} setuser={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    <Button className='listButton' onClick={() => setvisable({tennis: !visable.tennis})}><img className='button_image' src={visable.tennis ? filledIcon : outlineIcon} alt='+' /><Box className='button_text'>Tennis</Box></Button>
+                    {visable.tennis ? <List names={['Australian Open', 'French Open', 'US Open', 'Wimbledon']} sport={'tennis'} list={['tennis-atp-australian-open-men-singles-qual', 'tennis-atp-french-open-men-singles', 'tennis-atp-us-open-men-singles', 'tennis-atp-wimbledon-men-s-singles']} setform={setform} form={form} setliked={setliked} setuser={setuserdata} user={userdata} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : null}
+                    </Box>
+                </ThemeProvider>
                 </div>
-                {form.valid ? <AddTeam setform={setform} form={form} user={user} liked={liked} setliked={setliked}/> : null }
+                {form.valid ? <AddTeam setform={setform} form={form} user={userdata} setallTeams={setallTeams} setlikedTeams={setlikedTeams} sethatedTeams={sethatedTeams} liked={liked} setliked={setliked} getuserdata={getUserData} allTeams={allTeams} likedTeams={likedTeams} hatedTeams={hatedTeams}/> : <AddTeamInfo /> }
             </div>
-            <Footer />
         </div>
     )
 }

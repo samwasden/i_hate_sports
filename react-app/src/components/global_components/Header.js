@@ -1,38 +1,64 @@
 import React, {useState} from 'react'
 import Dashboard from './Dashboard'
 import './global_stylesheets/Header.css'
-import settings_icon from '../../content/icons/settings_icon.png'
-import close_icon from '../../content/icons/close_icon.png'
-import { Link } from 'react-router-dom'
+import { ThemeProvider } from '@emotion/react'
+import {Theme} from './Theme'
+import { Button, ButtonGroup, Box } from '@mui/material'
 
 
-export default function Header({user}) {
+export default function Header(props) {
     const [dashboard, setdashboard] = useState(false)
+
+    const {user, setpage} = props
 
     return (
         <div className='header'>
+            <div className='header_title'>
+                <ThemeProvider theme={Theme}>
+                        <ButtonGroup variant="text" aria-label="text button group">
+                            <Button onClick={() => setpage({homepage: true, myteams: false, browseteams: false})}>
+                                <Box className='nav_button' id='page_title'>
+                                    I Hate Sports.
+                                </Box>
+                            </Button>
+                        </ButtonGroup>
+                </ThemeProvider>
+            </div>
             <div className='header_panel' id='nav_panel'>
                 <div id='navbar'>
-                    <Link to='/home' className='nav_button'>
-                        dashboard
-                    </Link>
-                    <Link to='/myteams' className='nav_button'>
-                        my teams
-                    </Link>
-                    <Link to='/browseteams' className='nav_button'>
-                        browse teams
-                    </Link>
+                    <ThemeProvider theme={Theme}>
+                        <ButtonGroup variant="text" aria-label="text button group">
+                            <Button onClick={() => setpage({homepage: true, myteams: false, browseteams: false})}>
+                                <Box className='nav_button'>
+                                    dashboard
+                                </Box>
+                            </Button>
+                            <Button onClick={() => setpage({homepage: false, myteams: true, browseteams: false})}>                                                  
+                                <Box className='nav_button'>
+                                    my teams
+                                </Box>
+                            </Button>
+                            <Button onClick={() => setpage({homepage: false, myteams: false, browseteams: true})}>
+                                <Box className='nav_button'>
+                                    browse teams
+                                </Box>
+                            </Button>
+                        </ButtonGroup>
+                    </ThemeProvider>
+
                 </div>
             </div>
-            <div className='header_title'>
-                <Link to='/home' className='header_name'>sports suck.</Link>
-            </div>
             <div className='header_panel' id='account_panel'>
-                <button id={dashboard ? 'close_button' : 'settings_button'} onClick={() => setdashboard(!dashboard)}>
-                    {dashboard ? null : 'account'}
-                    {dashboard ? <img id='close_icon' src={close_icon} alt='close' /> : <img id='settings_icon' src={settings_icon} alt='settings' />}
-                </button>
                 {dashboard ? <Dashboard user={user} /> : null}
+                <ThemeProvider theme={Theme}>
+                        <ButtonGroup variant="text" aria-label="text button group">
+                            <Button onClick={() => setdashboard(!dashboard)} >
+                                <Box className='nav_button' id='account_button'>
+                                    {dashboard ? 'close' : 'account'}
+                                </Box>
+                            </Button>
+                        </ButtonGroup>
+                </ThemeProvider>
             </div>
         </div>
     )

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
-import { auth, sendPasswordResetEmail } from "../firebase/firebase";
+import { appAuth, sendPasswordResetEmail } from "../firebase/firebase";
+import { Button, TextField, FormLabel, Box } from "@mui/material";
+import {Theme} from "../global_components/Theme";
+import { ThemeProvider } from "@emotion/react";
 
 function Reset(props) {
   const {setreset, setlogin} = props
   const [email, setEmail] = useState("");
-  const [user, loading] = useAuthState(auth);
+  const [user, loading] = useAuthState(appAuth);
   const history = useHistory();
   useEffect(() => {
     if (loading) return;
@@ -15,29 +18,35 @@ function Reset(props) {
   }, [user, loading]);
   return (
     <div className="login_panel">
-      <div className="login_container">
-        <input
-          type="text"
+      <ThemeProvider theme={Theme} >
+      <div className="template_container" id='reset_container'>
+        <TextField
+          type="email"
           className="login_textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
+          label="Email"
+          InputProps={{ style: { color: "white" } }}
         />
-        <button
+        <Button
+          variant='contained'
           className="login_btn"
           onClick={() => sendPasswordResetEmail(email)}
         >
           Send reset email
-        </button>
-        <div className='login_prompt'>
+        </Button>
+        <FormLabel className='login_prompt'>
           Don't have an account? 
-        </div>
-        <button className='login_link' onClick={(e) => {
+        </FormLabel>
+        <Button className='login_link' onClick={(e) => {
           e.preventDefault()
           setreset(false)
           setlogin(false)
-        }}>Register</button>
+        }}>
+            <Box className='login_link'>Register</Box>
+          </Button>
       </div>
+      </ThemeProvider>
     </div>
   );
 }

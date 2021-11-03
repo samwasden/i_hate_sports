@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Radio, FormControl, FormControlLabel, RadioGroup, Rating, Button, Box } from '@mui/material';
+import { Radio, FormGroup, FormControlLabel, FormLabel, RadioGroup, Rating, Button, Box, Typography } from '@mui/material';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import { addTeam } from '../firebase/team_management';
+import {Theme} from "../global_components/Theme";
+import { ThemeProvider } from "@emotion/react";
 
 const labels = {
     0: 'No Feeling',
@@ -16,22 +18,25 @@ const labels = {
   };
 
 
-export default function AddTeam({form, setform, user, liked, setliked}) {
+export default function AddTeam({form, setform, user, liked, setliked, getuserdata, setlikedTeams, sethatedTeams, setallTeams, likedTeams, hatedTeams, allTeams}) {
 
     const [hover, setHover] = useState(-1);
+    // eslint-disable-next-line no-unused-vars
+    const [teamsport, setteamsport] = useState(!['boxing', 'golf', 'mma', 'tennis'].includes(form.sport))
 
     return (
-        <div className='team_form' style={liked ? {backgroundColor: 'green'} : {backgroundColor: 'darkred'} }>
-            <FormControl sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly'}} component="fieldset">
-                <h1 className='form_title'>{form.teamname}</h1>
+        <div className='team_form_box' >
+            <ThemeProvider theme={Theme}>
+            <FormGroup className='team_form' id={liked ? 'liked_team_form' : 'hated_team_form'} >
+                <Typography variant='h4' className='form_title'>{form.teamname}</Typography>
+                <div className='dividing_line'></div>
                     <RadioGroup value={liked} name="radio-buttons-group" >
-                        <FormControlLabel value={true} control={<Radio />} label="I like this team" onClick={(e) => setliked(true)} />
-                        <FormControlLabel value={false} control={<Radio />} label="I don't like this team" onClick={(e) => setliked(false)} />
+                        <FormControlLabel value={true} control={<Radio />} label={teamsport ? "I like this team" : "I like this athlete"} onClick={() => setliked(true)} />
+                        <FormControlLabel value={false} control={<Radio />} label={teamsport ? "I don't like this team" : "I don't like this athlete"} onClick={() => setliked(false)} />
                     </RadioGroup>
-                <h4 className='form_label'>How much do you {liked ? 'like' : 'dislike'} this team?</h4>  
-                <div className='rating_box'>
+                <FormLabel className='form_label'>How much do you {liked ? 'like' : 'dislike'} this {teamsport ? 'team' : 'athlete'}?</FormLabel>  
+                <Box className='rating_box'>
                 <Rating
-                    sx={{width: '40%'}}
                     name="customized-color"
                     value={form.rating}
                     precision={1}
@@ -46,21 +51,33 @@ export default function AddTeam({form, setform, user, liked, setliked}) {
                     }}
                     />
                     {form.rating !== null && (
-                        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : form.rating]}</Box>
+                        <FormLabel htmlFor='customized-color' sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : form.rating]}</FormLabel>
                     )}    
-                    </div>
-                <div className='button_box'>
-                    <Button sx={{color: 'white', border: '2px solid white', marginTop: '10%', ':hover': {backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '2px solid white'}}} variant='outlined' onClick={() => {
-                        setform(false)
-                        setliked(true)
+                    </Box>
+                <Box className='button_box'>
+                    <Button 
+                        className='form_buttons'
+                        variant='contained' 
+                        margin='normal'
+                        onClick={() => {
+                            setform(false)
+                            setliked(true)
                     }}>cancel</Button>
-                    <Button sx={{color: 'white', border: '2px solid white', marginTop: '10%', ':hover': {backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '2px solid white'}}} variant='outlined' onClick={() => {
-                        addTeam(user, form, liked)
-                        setform(false)
-                        setliked(true)
+                    <Button 
+                        className='form_buttons'
+                        id='submit_team_button'
+                        variant='contained' 
+                        onClick={() => {
+                            addTeam(user, form, liked)
+                            setform(false)
+                            setliked(true)
+                            getuserdata()
+                            liked ? setlikedTeams([...likedTeams, form.teamname]) : sethatedTeams([...hatedTeams, form.teamname])
+                            setallTeams([...likedTeams, ...hatedTeams, form.teamname])
                     }}>Submit</Button>
-                </div>
-            </FormControl>
+                </Box>
+            </FormGroup>
+            </ThemeProvider>
         </div>
     )
 }

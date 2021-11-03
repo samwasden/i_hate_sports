@@ -1,29 +1,56 @@
 import Header from '../global_components/Header'
 import Footer from '../global_components/Footer'
 import './homepage_stylsheets/Home.css'
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
-import { auth } from "../firebase/firebase";
+import { appAuth } from "../firebase/firebase";
+import Loading from '../global_components/Loading';
+import { fetchUserData } from '../firebase/team_management';
+import Homepage from './Homepage';
+import MyTeams from '../myteams_components/MyTeams';
+import BrowseTeams from '../browseteams_components/BrowseTeams';
 
 export default function Home() {
 
-    const [user, loading] = useAuthState(auth);
+    const [user, loading] = useAuthState(appAuth);
     const history = useHistory();
+    const [userloading, setuserloading] = useState(true)
+
+    const [page, setpage] = useState({
+        homepage: true,
+        myteams: false,
+        browseteams: false
+    })
+    
+    const [userdata, setuserdata] = useState({
+        email: 'email',
+        username: 'user',
+        uid: 'UNKNOWN',
+        likedTeams: [],
+        hatedTeams: []
+    })
     
     useEffect(() => {
-      if (loading) return;
-      if (!user) return history.replace("/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        if (loading) return <Loading />;
+        if (!user) {
+            return history.replace("/")
+        }
+        Promise.resolve(fetchUserData(user)).then((value) => {
+            setuserdata(value)
+            setuserloading(false)
+        })
+        if (userloading) return <Loading />;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, loading]);
 
     return (
-        <div className='page' id='home'>
-            <Header user={user} />
-            <div className='page_content'>
-
-            </div>
+        <div>
+            <Header user={userdata} setpage={setpage} />
+                {page.homepage ? <Homepage user={userdata} setpage={setpage} userloading={userloading}/> : null}
+                {page.myteams ? <MyTeams userdata={userdata} setpage={setpage}/> : null}
+                {page.browseteams ? <BrowseTeams userdata={userdata} setuserdata={setuserdata} getUserData={fetchUserData} setpage={setpage}/> : null}
             <Footer />
-        </div>
+    </div>
     )
 }

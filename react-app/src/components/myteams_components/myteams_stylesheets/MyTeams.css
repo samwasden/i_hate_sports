@@ -1,3 +1,10 @@
+#myTeams {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
 #addteams_box {
     display: flex;
     width: 90vw;
@@ -5,3 +12,135 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+#liked_teams {
+    margin-left: 7.5vw;
+}
+
+#hated_teams {
+    margin-right: 7.5vw;
+    margin-left: 5vw;
+}
+
+.team_list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-direction: column;
+    width: 30vw;
+    padding: 5vh 5vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    background: #ffffff27;
+}
+.team_list h1 {
+    margin: 4vh 2vw;
+    width: auto;
+}
+
+.teams_box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100vw;
+}
+
+.my_teams {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 1vw;
+    width: 28vw;
+    height: 10vh;
+    margin: 1vh 0;
+    background: #000000bd;
+}
+
+.my_team_name {
+    width: 10vw;
+    text-align: start;
+}
+
+.my_team_rating {
+    width: 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.my_team_info {
+    height: inherit;
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.my_team_event {
+    height: inherit;
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.odds_chart {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    height: 3vh;
+}
+
+.odds_chart:hover .odds_meter {
+    height: 2px;
+}
+
+.odds_chart:hover .odds_meter p {
+    font-size: 0;
+}
+
+.odds_chart .odds_meter p {
+    font-size: 12pt;
+    transition-duration: 100ms;
+}
+
+
+.odds_meter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3vh;
+    transition-duration: 150ms;
+    border: 1px solid white;
+}
+
+.teams_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1vw;
+    width: 28vw;
+}
+
+.percentage_key {
+    display: flex
+}
+
+.color_box {
+    width: 8px;
+    height: 8px;
+    border: 1% solid white;
+    margin: 0 .5vw;
+}
+
+.color_key {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+

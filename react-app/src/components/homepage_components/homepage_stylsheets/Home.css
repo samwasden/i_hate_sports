@@ -4,3 +4,73 @@
     align-items: center;
     flex-direction: column;
 }
+
+#homepage_display {
+    width: 85vw;
+    height: 75vh;
+    margin: 5vh 7.5vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.homepage_block {
+    background: #ffffff27;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#teams_panel {
+    height: 75vh;
+    width: 30vw;
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#charts_panel {
+    height: 65vh;
+    width: 42.5vw;
+    padding: 5vh 5vw;
+}
+
+#liked_panel {
+    height: 32.5vh;
+    width: 20vw;
+    padding: 5vh 5vw;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#hated_panel {
+    height: 20vh;
+    width: 20vw;
+    padding: 5vh 5vw;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.teams_panel_header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dash_team_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.chart_box {
+    display: flex;
+    height: 50%;
+    width: 30vw;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
+import { Button, TextField, FormLabel, Box } from "@mui/material";
+import {Theme} from "../global_components/Theme";
+import { ThemeProvider } from "@emotion/react";
 import {
-  auth,
+  appAuth,
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "../firebase/firebase";
@@ -12,7 +15,7 @@ function Register(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [user, loading] = useAuthState(auth);
+  const [user, loading] = useAuthState(appAuth);
   const history = useHistory();
   const register = () => {
     if (!name) alert("Please enter name");
@@ -25,45 +28,55 @@ function Register(props) {
   }, [user, loading]);
   return (
     <div className="login_panel">
-      <div className="login_container">
-        <input
+      <ThemeProvider theme={Theme}>
+      <div className="template_container" id='register_container'>
+        <TextField
           type="text"
           className="login_textBox"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
+          label="Full Name"
+          InputProps={{ style: { color: "white" } }}
         />
-        <input
-          type="text"
+        <TextField
+          type="email"
           className="login_textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
+          label="E-mail Address"
+          InputProps={{ style: { color: "white" } }}
         />
-        <input
+        <TextField
           type="password"
           className="login_textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          label="Password"
+          InputProps={{ style: { color: "white" } }}
         />
-        <button className="login_btn" onClick={register}>
+        <Button 
+          variant='contained'
+          className="login_btn" 
+          onClick={register}>
           Register
-        </button>
-        <button
+        </Button>
+        <Button
+          variant='outlined'
           className="login_btn login_google"
-          onClick={signInWithGoogle}
-        >
+          onClick={signInWithGoogle}>
           Register with Google
-        </button>
-        <div className='login_prompt'>
+        </Button>
+        <FormLabel className='login_prompt'>
           Already have an account? 
-        </div>
-        <button className='login_link' onClick={(e) => {
+        </FormLabel>
+        <Button className='login_link' onClick={(e) => {
           e.preventDefault()
           setlogin(true)
-          }}>Login</button>
+          }}>
+            <Box className='login_link'>Login</Box>
+          </Button>
       </div>
+      </ThemeProvider>
     </div>
   );
 }
