@@ -36,7 +36,7 @@ export default function Home() {
         if (!user) {
             return history.replace("/")
         }
-        Promise.resolve(fetchUserData(user)).then((value) => {
+        Promise.resolve(fetchUserData (user)).then((value) => {
             setuserdata(value)
             setuserloading(false)
         })

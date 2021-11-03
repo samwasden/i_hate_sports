@@ -8,14 +8,22 @@ import { getData, getTeam } from '../firebase/firebase'
 export default function Homepage({user, userloading}) {
 
     let resultData = getData(user)
-    let teamData = []
 
-    const [chart, setchart] = useState(false)
-    const [chartteam, setchartteam] = useState(null)
+    const [chart, setchart] = useState(true)
+    const [chartteam, setchartteam] = useState({name: 'no team selected'})
 
-    useEffect(() => {
-        teamData = getTeam(chartteam)
-    }, [chartteam])
+    const [activeIndex, setactiveIndex] = useState(0)
+    const [resultsactiveIndex, setresultsactiveIndex] = useState(0)
+
+    const validEvent = (team) => {
+        let date = new Date()
+        if (team.nextEvent) {
+            if (team.nextEvent.expires > date.getTime() / 1000) {
+                return true
+            }
+        }
+        return false
+    }
 
     return (
         <div className='page'>
@@ -29,7 +37,7 @@ export default function Homepage({user, userloading}) {
                                 <Typography variant='h6'>LIKED TEAMS</Typography>
                             </div>
                             {user.likedTeams.map((team, index) => {
-                                return <DashTeam key={index} team={team}/>
+                                return <DashTeam key={index} team={team} chart={chart} setchart={setchart} setchartteam={setchartteam} chartteam={chartteam}/>
                             })}
                         </div>
                         <div className='homepage_block' id='hated_panel'>
@@ -37,21 +45,27 @@ export default function Homepage({user, userloading}) {
                                 <Typography variant='h6'>DISLIKED TEAMS</Typography>
                             </div>
                             {user.hatedTeams.map((team, index) => {
-                                return <DashTeam key={index} team={team} chart={chart} setchart={setchart} setchartteam={setchartteam}/>
+                                return <DashTeam key={index} team={team} chart={chart} setchart={setchart} setchartteam={setchartteam} chartteam={chartteam}/>
                             })}
                         </div>
                     </div>
-                    <div className='homepage_block' id='charts_panel'>
-                        {chart ? <div className='chart_box'>
-                            <Typography>Results</Typography>
-                            <PieChartComponent data={teamData} innerRadius={50} outerRadius={75}/>
-                        </div> : null }
-                        <div className='chart_box'>
-                            <Typography>Results</Typography>
-                            <PieChartComponent data={resultData} innerRadius={50} outerRadius={75}/>
+                    <div className='homepage_block' id='charts_container'>
+                        <div className='homepage_block' id='summary_panel'>
+
+                        </div>
+                        <div className='homepage_block' id='charts_panel'>
+                            <div className='chart_box' id='team_chart_box'>
+                                <Typography variant='button'>{chartteam.name}</Typography>
+                                <Typography variant='body2'>{validEvent(chartteam) ? (chartteam.nextEvent.home ? 'vs ' : '@ ') + chartteam.nextEvent.opponent : 'no upcoming event.'}</Typography>
+                                <PieChartComponent data={getTeam(chartteam)} innerRadius={50} outerRadius={75} activeIndex={activeIndex} setactiveIndex={setactiveIndex}/>
+                            </div>
+                            <div className='chart_box' id='results_chart_box'>
+                                <Typography variant='button'>All Results</Typography>
+                                <Typography variant='body2'>All liked and disliked teams</Typography>
+                                <PieChartComponent data={resultData} innerRadius={50} outerRadius={75} activeIndex={resultsactiveIndex} setactiveIndex={setresultsactiveIndex}/>
+                            </div>
                         </div>
                     </div>
-                    
                 </div>
                 ) : null }
             </div>

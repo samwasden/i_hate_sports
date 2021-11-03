@@ -79,20 +79,44 @@ const logout = () => {
 const getData = (user) => {
   const date = new Date()
   const initArr = user.likedTeams.filter(team => team.nextEvent && team.nextEvent.expires < date.getTime())
+  const hatedArr = user.hatedTeams.filter(team => team.nextEvent && team.nextEvent.expires < date.getTime())
   let totalWin = 0
   let totalLose = 0
   let totalDraw = 0
-  initArr.forEach(team => {
-      totalWin += (+team.nextEvent.winProbability)
-      totalLose += (+team.nextEvent.lossProbabliity)
-      totalDraw += 1 - ((+team.nextEvent.winProbability + +team.nextEvent.lossProbabliity))
-  })
+  let totalArr = [...initArr, ...hatedArr]
+  if (totalArr.length > 0) {
+    initArr.forEach(team => {
+        totalWin += (+team.nextEvent.winProbability)
+        totalLose += (+team.nextEvent.lossProbabliity)
+        totalDraw += 1 - ((+team.nextEvent.winProbability + +team.nextEvent.lossProbabliity))
+    })
+    hatedArr.forEach(team => {
+        totalWin += (+team.nextEvent.lossProbabliity)
+        totalLose += (+team.nextEvent.winProbability)
+        totalDraw += 1 - ((+team.nextEvent.winProbability + +team.nextEvent.lossProbabliity))
+    })
+    return [{name: 'Positive', value: totalWin}, {name: 'Negative', value: totalLose}, {name: 'Neutral', value: totalDraw}, {name: 'No Event', value: 0}]
+  } else {
+    return [{name: 'Positive', value: 0}, {name: 'Negative', value: 0}, {name: 'Neutral', value: 0}, {name: 'No Event', value: 100}]
+  }
   
-  return [{name: 'Positive', value: totalWin}, {name: 'Negative', value: totalLose}, {name: 'Neutral', value: totalDraw}]
 }
 
 const getTeam = (team) => {
-  return []
+  if (validEvent(team)) {
+    return [{name: 'Win', value: team.nextEvent.winProbability}, {name: 'Lose', value: team.nextEvent.lossProbabliity}, {name: 'Draw', value: 1 - (team.nextEvent.winProbability + team.nextEvent.lossProbabliity)}, {name: 'No Event', value: 0}]
+  }
+  else return [{name: 'Win', value: 0}, {name: 'Lose', value: 0}, {name: 'Draw', value: 0}, {name: 'No Event', value: 100}]
+}
+
+const validEvent = (team) => {
+  let date = new Date()
+  if (team.nextEvent) {
+      if (team.nextEvent.expires > date.getTime() / 1000) {
+          return true
+      }
+  }
+  return false
 }
 
 export {

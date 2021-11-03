@@ -39,23 +39,26 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={'white'} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={'white'} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="white">{`PV ${value.toPrecision(3)}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="white">{`${payload.name}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {`(${(percent * 100).toFixed(2)}%)`}
       </text>
     </g>
   );
 };
 
-export default function PieChartComponent({data, innerRadius, outerRadius}) {
+export default function PieChartComponent({data, innerRadius, outerRadius, activeIndex, setactiveIndex}) {
 
   const colors = {
     'Positive': '#5EDA8D',
     'Negative': '#FF8042',
-    'Neutral': '#EED676'
+    'Neutral': '#EED676',
+    'Win': '#5EDA8D',
+    'Lose': '#FF8042',
+    'Draw': '#EED676',
+    'No Event': '#ffffff27'
   }
 
-  const [activeIndex, setactiveIndex] = useState(0)
 
   const onPieEnter = (_, index) => {
     setactiveIndex(index);

@@ -31,24 +31,48 @@
     flex-direction: column;
 }
 
+#charts_container {
+    height: 75vh;
+    width: 52.5vw;
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#summary_panel {
+    height: 7.5vh;
+    width: 47.5vw;
+    padding: 2.5vh 2.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
 #charts_panel {
-    height: 65vh;
-    width: 42.5vw;
-    padding: 5vh 5vw;
+    height: 55vh;
+    width: 47.5vw;
+    padding: 2.5vh 2.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
 }
 
 #liked_panel {
-    height: 32.5vh;
-    width: 20vw;
-    padding: 5vh 5vw;
+    height: 37.5vh;
+    width: 25vw;
+    padding: 2.5vh 2.5vw;
     overflow: hidden;
     overflow-y: scroll;
 }
 
 #hated_panel {
-    height: 20vh;
-    width: 20vw;
-    padding: 5vh 5vw;
+    height: 25vh;
+    width: 25vw;
+    padding: 2.5vh 2.5vw;
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -68,9 +92,17 @@
 
 .chart_box {
     display: flex;
-    height: 50%;
+    height: 30vh;
     width: 30vw;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#team_chart_box {
+    justify-self: flex-start
+}
+
+#results_chart_box {
+    justify-self: flex-end
 }

@@ -18,7 +18,7 @@ export default function Header(props) {
                         <ButtonGroup variant="text" aria-label="text button group">
                             <Button onClick={() => setpage({homepage: true, myteams: false, browseteams: false})}>
                                 <Box className='nav_button' id='page_title'>
-                                    I Hate Sports.
+                                    Sports Suck
                                 </Box>
                             </Button>
                         </ButtonGroup>
