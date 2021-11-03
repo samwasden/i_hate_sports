@@ -226,17 +226,17 @@ const fetchTeamObjects = async (teams) => {
 const fetchUserData = async (user) => {
   try {
     let obj;
-    const query = await db
+    await db
       .collection("users")
-      .where("uid", "==", user?.uid)
-      .get();
-    query.forEach(async (doc) => {
-      obj = {
-        username: doc.data().name,
-        email: doc.data().email,
-        uid: doc.data().uid,
-      }
-    });
+      .doc(user?.uid)
+      .get()
+      .then(snapshot => {
+        obj = {
+          username: snapshot.data().name,
+          email: snapshot.data().email,
+          uid: snapshot.data().uid,
+        }
+      })
     return {...obj, likedTeams: await fetchLikedTeams(user), hatedTeams: await fetchHatedTeams(user)}
   } catch (err) {
     console.error(err);
