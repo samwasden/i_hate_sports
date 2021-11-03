@@ -30,6 +30,13 @@ export default function Home() {
         likedTeams: [],
         hatedTeams: []
     })
+
+    const getUserData = () => {
+        Promise.resolve(fetchUserData (user)).then((value) => {
+            setuserdata(value)
+            setuserloading(false)
+        })
+    }
     
     useEffect(() => {
         if (loading) return <Loading />;
@@ -49,7 +56,7 @@ export default function Home() {
             <Header user={userdata} setpage={setpage} />
                 {page.homepage ? <Homepage user={userdata} setpage={setpage} userloading={userloading}/> : null}
                 {page.myteams ? <MyTeams userdata={userdata} setpage={setpage}/> : null}
-                {page.browseteams ? <BrowseTeams userdata={userdata} setuserdata={setuserdata} getUserData={fetchUserData} setpage={setpage}/> : null}
+                {page.browseteams ? <BrowseTeams userdata={userdata} setuserdata={setuserdata} getUserData={getUserData} setpage={setpage}/> : null}
             <Footer />
     </div>
     )
