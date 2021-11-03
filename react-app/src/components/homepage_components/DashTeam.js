@@ -2,8 +2,10 @@ import React, {useState} from 'react'
 import { Button, Typography } from '@mui/material'
 import { ThemeProvider } from '@emotion/react'
 import { Theme } from '../global_components/Theme'
+import { validEvent } from '../firebase/firebase'
 
-export default function DashTeam({team, setchartteam, setchart, chart, chartteam}) {
+
+export default function DashTeam({team, setchartteam, setchart, chart, chartteam, setactiveindex}) {
 
     const [teamdetails, setteamdetails] = useState(false)
     const date = new Date()
@@ -13,6 +15,11 @@ export default function DashTeam({team, setchartteam, setchart, chart, chartteam
         <ThemeProvider theme={Theme}>
             <Button onMouseOver={() => setteamdetails(true)} onMouseOut={() => setteamdetails(false)} onClick={() => {
                 setchartteam(team)
+                if (validEvent(team)) {
+                    setactiveindex(0)
+                } else {
+                    setactiveindex(3)
+                }
             }
             }>{team.name}</Button>
             {teamdetails ? (

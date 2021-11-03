@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PieChartComponent from './PieChart'
 import DashTeam from './DashTeam'
-import { getData, getTeam } from '../firebase/firebase'
+import { getData, getTeam, validEvent } from '../firebase/firebase'
 // import { updateEvents } from '../firebase/team_management'
 
 export default function Homepage({user, userloading}) {
@@ -15,15 +15,7 @@ export default function Homepage({user, userloading}) {
     const [activeIndex, setactiveIndex] = useState(0)
     const [resultsactiveIndex, setresultsactiveIndex] = useState(0)
 
-    const validEvent = (team) => {
-        let date = new Date()
-        if (team.nextEvent) {
-            if (team.nextEvent.expires > date.getTime() / 1000) {
-                return true
-            }
-        }
-        return false
-    }
+
 
     return (
         <div className='page'>
@@ -37,7 +29,7 @@ export default function Homepage({user, userloading}) {
                                 <Typography variant='h6'>LIKED TEAMS</Typography>
                             </div>
                             {user.likedTeams.map((team, index) => {
-                                return <DashTeam key={index} team={team} chart={chart} setchart={setchart} setchartteam={setchartteam} chartteam={chartteam}/>
+                                return <DashTeam key={index} team={team} chart={chart} setchart={setchart} setchartteam={setchartteam} chartteam={chartteam} setactiveindex={setactiveIndex}/>
                             })}
                         </div>
                         <div className='homepage_block' id='hated_panel'>
@@ -45,7 +37,7 @@ export default function Homepage({user, userloading}) {
                                 <Typography variant='h6'>DISLIKED TEAMS</Typography>
                             </div>
                             {user.hatedTeams.map((team, index) => {
-                                return <DashTeam key={index} team={team} chart={chart} setchart={setchart} setchartteam={setchartteam} chartteam={chartteam}/>
+                                return <DashTeam key={index} team={team} chart={chart} setchart={setchart} setchartteam={setchartteam} chartteam={chartteam} setactiveindex={setactiveIndex}/>
                             })}
                         </div>
                     </div>

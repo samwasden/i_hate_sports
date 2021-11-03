@@ -129,4 +129,5 @@ export {
   logout,
   getData,
   getTeam,
+  validEvent
 };
