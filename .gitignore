@@ -23,6 +23,6 @@ react-app/npm-debug.log*
 react-app/yarn-debug.log*
 react-app/yarn-error.log*
 
-server/node_modules
+functions/node_modules
 
 node_modules

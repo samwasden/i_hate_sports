@@ -19,7 +19,12 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
+    transition-duration: 300ms;
 }
+.homepage_block:hover {
+    background: #ffffff30;
+}
+
 
 #teams_panel {
     height: 75vh;
@@ -46,9 +51,9 @@
     width: 47.5vw;
     padding: 2.5vh 2.5vw;
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 #charts_panel {
@@ -58,7 +63,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 #liked_panel {
@@ -92,17 +97,32 @@
 
 .chart_box {
     display: flex;
-    height: 30vh;
+    height: 45vh;
     width: 30vw;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
 }
 
-#team_chart_box {
-    justify-self: flex-start
+.main_chart_container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    align-items: center;
+    flex-direction: row;
 }
 
-#results_chart_box {
-    justify-self: flex-end
+.chart_description {
+    display: flex;
+    width: 70%;
+    text-align: justify;
+    color: #D5D7E0;
+}
+
+.summary_description {
+    display: flex;
+    justify-content: flex-start;
+    width: 95%;
+    padding-left: 5%;
+    text-align: right;
 }

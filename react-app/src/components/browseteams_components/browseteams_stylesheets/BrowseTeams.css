@@ -14,7 +14,12 @@
     padding: 5vh 5vw;
     margin: 5vh 7.5vw;
     background: #ffffff27;
+    transition-duration: 300ms;
 }
+#all_teams_list:hover {
+    background: #ffffff30;
+}
+
 
 .listbutton {
     size: 2rem;
@@ -74,7 +79,12 @@
     width: 20vw;
     padding: 3vh 2vw;
     background: #ffffff27;
+    transition-duration: 300ms;
 }
+.team_form:hover {
+    background: #ffffff30;
+}
+
 
 #liked_team_form .button_box #submit_team_button {
     background: #5EDA8D;

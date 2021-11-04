@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { ThemeProvider } from '@emotion/react'
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
@@ -21,6 +21,12 @@ export default function DisplayTeam({liked, team}) {
         drawProbability = 100 - (winProbability + lossProbabliity)
     }
 
+    const [loaded, setloaded] = useState(false)
+
+    useEffect(() => {
+        setloaded(true)
+    }, [])
+
     return (
         <div className='my_teams'>
             <ThemeProvider theme={Theme}>
@@ -34,13 +40,13 @@ export default function DisplayTeam({liked, team}) {
                             return liked ? <ThumbUpAltIcon key={index}/> : <ThumbDownAltIcon key={index}/>
                         })}
                     </Box>
-                    <Typography>{team.rating}/5</Typography>
+                    <Typography sx={{color: '#D5D7E0'}} variant='button'>{team.rating}/5</Typography>
                 </Box>
             </Box>
             {team.nextEvent && team.nextEvent.expires > date? 
             <Box className='my_team_event'>
                 <Typography variant='button'>{team.nextEvent.home ? 'vs' : '@'} {team.nextEvent.opponent.toUpperCase()}</Typography>
-                <Box className='odds_chart'>
+                <Box className='odds_chart' style={loaded ? {width: '100%'} : {width: '0%'}}>
                     <div className='odds_meter' style={{width: `${winProbability}%`, background: '#5EDA8D'}}><p>{winProbability > 10 ? `${winProbability}%` : null}</p></div>
                     <div className='odds_meter' style={{width: `${lossProbabliity}%`, background: '#FF8042'}}><p>{lossProbabliity > 10 ? `${lossProbabliity}%` : null}</p></div>
                     {team.nextEvent.sport === 'soccer' || team.nextEvent.sport === 'ice-hockey' ? <div className='odds_meter' style={{width: `${drawProbability}%`, background: '#EED676'}}>
