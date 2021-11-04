@@ -41,3 +41,29 @@
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .login_panel {
+    width: 100vw;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .template_container {
+    padding: 6vw 6vh;
+  }
+
+  #login_container {
+    height: 54vh;
+  }
+  
+  #register_container {
+    height: 60vh;
+  }
+  
+  #reset_container {
+    height: 32vh;
+  }
+}

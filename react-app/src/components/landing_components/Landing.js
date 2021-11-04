@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import React, {useState} from 'react'
 import Login from '../login_components/Login'
 import Register from '../login_components/Register'
@@ -11,8 +12,8 @@ export default function Landing() {
         <div id='landing' className='page'>
             <div className='panel' id='information'>
                 <div id='title_container'>
-                    <h1>Sports Suck.</h1>
-                    <h2>and we won't let you forget it.</h2>
+                    <Typography variant='h3'>SPORTS SUCK.</Typography>
+                    <Typography variant='h6'>and we won't let you forget it.</Typography>
                 </div>
             </div>
             {login ? (reset ? <Reset setlogin={setlogin} setreset={setreset} /> : <Login setlogin={setlogin} setreset={setreset} />) : <Register setlogin={setlogin}/>}

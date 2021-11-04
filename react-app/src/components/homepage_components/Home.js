@@ -17,6 +17,13 @@ export default function Home() {
     const history = useHistory();
     const [userloading, setuserloading] = useState(true)
 
+    // const isMobile = () => {
+    //     if (window.innerWidth >= 768) {
+    //         return false
+    //     }
+    //     return true
+    // }
+
     const [page, setpage] = useState({
         homepage: true,
         myteams: false,
@@ -53,7 +60,7 @@ export default function Home() {
 
     return (
         <div>
-            <Header user={userdata} setpage={setpage} />
+            <Header user={userdata} setpage={setpage}/>
                 {page.homepage ? <Homepage user={userdata} setpage={setpage} userloading={userloading}/> : null}
                 {page.myteams ? <MyTeams userdata={userdata} setpage={setpage}/> : null}
                 {page.browseteams ? <BrowseTeams userdata={userdata} setuserdata={setuserdata} getUserData={getUserData} setpage={setpage}/> : null}

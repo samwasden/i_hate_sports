@@ -29,10 +29,18 @@
     font-family: 'RobotoMono';
 }
 
-#title_container h1 {
-    font-size: 3rem;
-}
+@media screen and (max-width: 768px) {
+    #landing {
+      flex-direction: column;
+    }
 
-#title_container h2 { 
-    font-size: 2rem;
-}
+    #information {
+        width: 100vw;
+        height: 20vh;
+        max-height: 20vh;
+    }
+
+    #title_container {
+        align-items: center;
+    }
+  }
