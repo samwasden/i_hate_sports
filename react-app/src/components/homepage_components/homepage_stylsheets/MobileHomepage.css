@@ -1,34 +1,28 @@
-#home {
+#mobile_homepage_display {
+    width: 90vw;
+    margin: 5vh 5vw;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
 }
 
-#homepage_display {
-    width: 85vw;
-    height: 75vh;
-    margin: 5vh 7.5vw;
-    display: flex;
-    justify-content: space-between;
-}
-
-.homepage_block {
+.mobile_homepage_block {
     background: #ffffff27;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     transition-duration: 300ms;
+    margin-bottom: 2.5vh;
 }
-.homepage_block:hover {
+.mobile_homepage_block:hover {
     background: #ffffff30;
 }
 
 
-#teams_panel {
-    height: 75vh;
-    width: 30vw;
+#mobile_teams_panel {
+    width: 90vw;
     background: none;
     display: flex;
     justify-content: space-between;
@@ -36,9 +30,8 @@
     flex-direction: column;
 }
 
-#charts_container {
-    height: 75vh;
-    width: 52.5vw;
+#mobile_charts_container {
+    width: 90vw;
     background: none;
     display: flex;
     justify-content: space-between;
@@ -46,9 +39,8 @@
     flex-direction: column;
 }
 
-#summary_panel {
-    height: 7.5vh;
-    width: 47.5vw;
+#mobile_summary_panel {
+    width: 85vw;
     padding: 2.5vh 2.5vw;
     display: flex;
     align-items: flex-start;
@@ -56,9 +48,8 @@
     flex-direction: column;
 }
 
-#charts_panel {
-    height: 55vh;
-    width: 47.5vw;
+#mobile_charts_panel {
+    width: 85vw;
     padding: 2.5vh 2.5vw;
     display: flex;
     align-items: center;
@@ -66,60 +57,54 @@
     flex-direction: column;
 }
 
-#liked_panel {
-    height: 37.5vh;
-    width: 25vw;
+#mobile_liked_panel {
+    width: 85vw;
     padding: 2.5vh 2.5vw;
-    overflow: hidden;
-    overflow-y: scroll;
 }
 
-#hated_panel {
-    height: 25vh;
-    width: 25vw;
+#mobile_hated_panel {
+    width: 85vw;
     padding: 2.5vh 2.5vw;
-    overflow: hidden;
-    overflow-y: scroll;
 }
 
-.teams_panel_header {
+.mobile_teams_panel_header {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 
-.dash_team_box {
+.mobile_dash_team_box {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
 }
 
-.chart_box {
+.mobile_chart_box {
     display: flex;
-    height: 45vh;
-    width: 30vw;
+    width: inherit;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
 }
 
-.main_chart_container {
+.mobile_main_chart_container {
     display: flex;
     justify-content: space-evenly;
     width: 90%;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column-reverse;
 }
 
-.chart_description {
+.mobile_chart_description {
     display: flex;
-    width: 70%;
+    width: 100%;
     text-align: justify;
     color: #D5D7E0;
+    margin-bottom: 2.5vh;
 }
 
-.summary_description {
+.mobile_summary_description {
     display: flex;
     justify-content: flex-start;
     width: 95%;

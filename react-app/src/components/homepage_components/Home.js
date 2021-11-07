@@ -1,5 +1,5 @@
 import Header from '../global_components/Header'
-import Footer from '../global_components/Footer'
+import MobileFooter from '../global_components/MobileFooter'
 import './homepage_stylsheets/Home.css'
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -10,6 +10,9 @@ import { fetchUserData } from '../firebase/team_management';
 import Homepage from './Homepage';
 import MyTeams from '../myteams_components/MyTeams';
 import BrowseTeams from '../browseteams_components/BrowseTeams';
+import MobileHeader from '../global_components/MobileHeader';
+import MobileHomepage from './MobileHomepage';
+import MobileBrowseTeams from '../browseteams_components/MobileBrowseTeams';
 
 export default function Home() {
 
@@ -17,12 +20,12 @@ export default function Home() {
     const history = useHistory();
     const [userloading, setuserloading] = useState(true)
 
-    // const isMobile = () => {
-    //     if (window.innerWidth >= 768) {
-    //         return false
-    //     }
-    //     return true
-    // }
+    const isMobile = () => {
+        if (window.innerWidth >= 768) {
+            return false
+        }
+        return true
+    }
 
     const [page, setpage] = useState({
         homepage: true,
@@ -60,11 +63,11 @@ export default function Home() {
 
     return (
         <div>
-            <Header user={userdata} setpage={setpage}/>
-                {page.homepage ? <Homepage user={userdata} setpage={setpage} userloading={userloading}/> : null}
-                {page.myteams ? <MyTeams userdata={userdata} setpage={setpage}/> : null}
-                {page.browseteams ? <BrowseTeams userdata={userdata} setuserdata={setuserdata} getUserData={getUserData} setpage={setpage}/> : null}
-            <Footer />
-    </div>
+            {isMobile() ? <MobileHeader user={userdata} setpage={setpage} /> : <Header user={userdata} setpage={setpage} />}
+                {page.homepage ? isMobile() ? <MobileHomepage user={userdata} setpage={setpage} userloading={userloading}  /> : <Homepage user={userdata} setpage={setpage} userloading={userloading} /> : null}
+                {page.myteams ? <MyTeams userdata={userdata} setpage={setpage}/ > : null}
+                {page.browseteams ? isMobile() ? <MobileBrowseTeams userdata={userdata} setuserdata={setuserdata} getUserData={getUserData} setpage={setpage}/> : <BrowseTeams userdata={userdata} setuserdata={setuserdata} getUserData={getUserData} setpage={setpage} /> : null}
+            {isMobile() ? <MobileFooter /> : null}
+        </div>
     )
 }

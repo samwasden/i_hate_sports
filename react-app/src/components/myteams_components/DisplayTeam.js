@@ -21,6 +21,14 @@ export default function DisplayTeam({liked, team}) {
         drawProbability = 100 - (winProbability + lossProbabliity)
     }
 
+
+    const isMobile = () => {
+        if (window.innerWidth >= 768) {
+            return false
+        }
+        return true
+    }
+
     const [loaded, setloaded] = useState(false)
 
     useEffect(() => {
@@ -32,20 +40,20 @@ export default function DisplayTeam({liked, team}) {
             <ThemeProvider theme={Theme}>
             <Box className='my_team_info'>
                 <Box className='my_team_name'>
-                    <Typography variant='button'>{team.name.toUpperCase()}</Typography>
+                    <Typography className='my_team_name_text' variant={isMobile() ? 'caption' : 'button'}>{team.name.toUpperCase()}</Typography>
                 </Box>
                 <Box className='my_team_rating'>
-                    <Box>
+                    <Box className='my_team_rating_box'>
                         {[...Array(+team.rating)].map((elem, index) => {
                             return liked ? <ThumbUpAltIcon key={index}/> : <ThumbDownAltIcon key={index}/>
                         })}
                     </Box>
-                    <Typography sx={{color: '#D5D7E0'}} variant='button'>{team.rating}/5</Typography>
+                    <Typography className='my_team_rating_text' sx={{color: '#D5D7E0'}} variant='button'>{team.rating}/5</Typography>
                 </Box>
             </Box>
             {team.nextEvent && team.nextEvent.expires > date? 
             <Box className='my_team_event'>
-                <Typography variant='button'>{team.nextEvent.home ? 'vs' : '@'} {team.nextEvent.opponent.toUpperCase()}</Typography>
+                <Typography className='my_team_name_text' variant={isMobile() ? 'caption' : 'button'}>{team.nextEvent.home ? 'vs' : '@'} {team.nextEvent.opponent.toUpperCase()}</Typography>
                 <Box className='odds_chart' style={loaded ? {width: '100%'} : {width: '0%'}}>
                     <div className='odds_meter' style={{width: `${winProbability}%`, background: '#5EDA8D'}}><p>{winProbability > 10 ? `${winProbability}%` : null}</p></div>
                     <div className='odds_meter' style={{width: `${lossProbabliity}%`, background: '#FF8042'}}><p>{lossProbabliity > 10 ? `${lossProbabliity}%` : null}</p></div>
@@ -54,7 +62,7 @@ export default function DisplayTeam({liked, team}) {
                     </div> : null}
                 </Box>
             </Box> : <Box className='my_team_event'>
-                <Typography variant='button'>NO UPCOMING EVENT</Typography>
+                <Typography className='my_team_name_text' variant={isMobile() ? 'caption' : 'button'}>NO UPCOMING EVENT</Typography>
             </Box> }
             </ThemeProvider>
         </div>

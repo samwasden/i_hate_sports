@@ -241,6 +241,13 @@ const fetchUserData = async (user) => {
   } catch (err) {
     console.error(err);
     console.log("An error occured while fetching user data");
+    return {
+      username: 'dummyname',
+      email: 'dummyemail',
+      uid: 'dummyid',
+      likedTeams: [],
+      hatedTeams: []
+    }
   }
 }
 

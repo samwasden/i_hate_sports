@@ -10,6 +10,13 @@ export default function Teams(props) {
 
     const {setform, teamnames, form, setliked, user, sport, league, likedTeams, hatedTeams, allTeams} = props
 
+    const isMobile = () => {
+        if (window.innerWidth >= 768) {
+            return false
+        }
+        return true
+    }
+
     return (
         <div>
             {teamnames.length > 1 ? <div className='teams'>
@@ -30,6 +37,12 @@ export default function Teams(props) {
                                         edit: true
                                     })
                                     setliked(true)
+                                    if (isMobile()) {
+                                        window.scrollTo({
+                                            left: 0, 
+                                            top: 0, 
+                                            behavior: "smooth" 
+                                        })                                    }
                                 } else if (hatedTeams.includes(teamname)) {
                                     const index = user.hatedTeams.findIndex(a => a.name === teamname)
                                     setform({
@@ -42,6 +55,12 @@ export default function Teams(props) {
                                         edit: true
                                     })
                                     setliked(false)
+                                    if (isMobile()) {
+                                        window.scrollTo({
+                                            left: 0, 
+                                            top: 0, 
+                                            behavior: "smooth" 
+                                        })                                    }
                                 } else {
                                     setform({
                                         ...form, 
@@ -52,6 +71,13 @@ export default function Teams(props) {
                                         league: league, 
                                         edit: false})
                                     setliked(true)
+                                    if (isMobile()) {
+                                        window.scrollTo({
+                                            left: 0, 
+                                            top: 0, 
+                                            behavior: "smooth" 
+                                        })
+                                    }
                                 }
                             }} className='listbutton' >
                                 <Box className='button_text'>{teamname}</Box>

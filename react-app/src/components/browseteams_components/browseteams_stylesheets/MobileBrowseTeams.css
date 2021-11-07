@@ -1,0 +1,142 @@
+.mobile_browse_teams_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100vw;
+}
+
+#mobile_all_teams_list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 80vw;
+    padding: 5vh 5vw;
+    margin: 5vh 5vw;
+    background: #ffffff27;
+    transition-duration: 300ms;
+}
+#mobile_all_teams_list:hover {
+    background: #ffffff30;
+}
+
+
+.mobile_listbutton {
+    size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: .5rem;
+}
+
+.mobile_league .listbutton {
+    margin-left: 2vw;
+}
+
+.mobile_teams .listbutton {
+    margin-left: 4vw;
+}
+
+.mobile_button_image {
+    height: 1rem;
+    filter: invert(1);
+    margin-right: 5px;
+}
+
+.mobile_teams {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.mobile_team_names {
+    margin-left: 4vw;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+.mobile_add_team {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 60vw;
+}
+
+.mobile_team_form {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 40vh;
+    width: 84vw;
+    padding: 3vh 2vw;
+    background: #ffffff27;
+    transition-duration: 300ms;
+}
+.mobile_team_form:hover {
+    background: #ffffff30;
+}
+
+
+#mobile_liked_team_form .mobile_button_box #mobile_submit_team_button {
+    background: #5EDA8D;
+}
+
+#mobile_hated_team_form .mobile_button_box #mobile_submit_team_button {
+    background: #FF8042;
+}
+
+.mobile_clickedlistbutton {
+    text-decoration: underline;
+    margin-left: 4vw;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+.mobile_rating_box {
+    display: flex;
+    width: 70vw;
+    justify-content: space-between;
+}
+
+.mobile_button_box {
+    display: flex;
+    width: 50vw;
+    justify-content: space-between;
+}
+
+.mobile_team_name_box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.mobile_button_text {
+    font-size: 1rem;
+}
+
+.mobile_form_info {
+    text-align: center;
+    width: 80%;
+}
+
+#mobile_info_dividing_line {
+    width: 50%;
+}
+
+#mobile_team_info_form {
+    height: 30vh;
+    width: 86vw;
+    padding: 4vh 2vw;
+}
+
