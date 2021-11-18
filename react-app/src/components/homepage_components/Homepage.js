@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import PieChartComponent from './PieChart'
 import DashTeam from './DashTeam'
 import { getData, getTeam, validEvent } from '../firebase/firebase'
-// import { updateEvents } from '../firebase/team_management'
 
 export default function Homepage({user, userloading}) {
 
@@ -22,7 +21,6 @@ export default function Homepage({user, userloading}) {
             <div className='page_content' >
                 {!userloading ? (
                 <div id='homepage_display'>
-                    {/* <button onClick={() => updateEvents()}>Click</button> */}
                     <div className='homepage_block' id='teams_panel'>
                         <div className='homepage_block' id='liked_panel'>
                             <div className='teams_panel_header'>

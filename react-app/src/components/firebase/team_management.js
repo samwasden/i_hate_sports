@@ -224,6 +224,7 @@ const fetchTeamObjects = async (teams) => {
 } 
 
 const fetchUserData = async (user) => {
+  checkForUpdate()
   try {
     let obj;
     await db
@@ -251,7 +252,37 @@ const fetchUserData = async (user) => {
   }
 }
 
-
+async function checkForUpdate() {
+  let date = new Date()
+  let currentTime = date.getTime()
+  let time;
+  try {
+    await db
+      .collection("login")
+      .doc("most-recent-update")
+      .get()
+      .then(snapshot => {
+        time = snapshot.data().timestamp
+      })
+  } catch (err) {
+      console.error(err);
+      console.log("An error occured while checking the update event");
+  }
+  if (+time + 28800000 < currentTime) {
+    updateEvents()
+    try {
+      await db
+        .collection("login")
+        .doc("most-recent-update")
+        .update({
+          timestamp: currentTime
+        })
+    } catch (err) {
+        console.error(err);
+        console.log("An error occured while updating the update event");
+    }
+  }
+}
 
 
 
