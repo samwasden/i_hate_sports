@@ -18,10 +18,12 @@
     justify-content: flex-start;
     align-items: flex-end;
     flex-direction: column;
-    width: 32.5vw;
+    width: 31vw;
     padding: 5vh 5vw;
     margin-top: 5vh;
     margin-bottom: 5vh;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
     background: #ffffff27;
     transition-duration: 300ms;
 }

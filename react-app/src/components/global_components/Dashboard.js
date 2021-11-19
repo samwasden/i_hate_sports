@@ -4,6 +4,7 @@ import './global_stylesheets/Dashboard.css'
 import { ThemeProvider } from '@emotion/react'
 import {Theme} from './Theme'
 import { Button, FormLabel } from '@mui/material'
+// import { updateEvents } from '../firebase/team_management'
 
 
 function Dashboard({user}) {
@@ -17,6 +18,7 @@ function Dashboard({user}) {
           <Button variant='contained' onClick={logout}>
             Logout
           </Button>
+          {/* <Button variant='contained' onClick={() => updateEvents()}>Update</Button> */}
         </ThemeProvider>
       </div>
     </div>

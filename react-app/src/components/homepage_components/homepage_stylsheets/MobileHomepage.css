@@ -111,3 +111,8 @@
     padding-left: 5%;
     text-align: left;
 }
+
+.mobile_pie_chart {
+    height: 70vw;
+    width: 90vw;
+}

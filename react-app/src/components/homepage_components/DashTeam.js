@@ -10,10 +10,25 @@ export default function DashTeam({team, setchartteam, setchart, chart, chartteam
     const [teamdetails, setteamdetails] = useState(false)
     const date = new Date()
 
+    const isMobile = () => {
+        if (window.innerWidth >= 768) {
+            return false
+        }
+        return true
+    }
+
+
     return (
         <div className='dash_team_box'>
         <ThemeProvider theme={Theme}>
             <Button onMouseOver={() => setteamdetails(true)} onMouseOut={() => setteamdetails(false)} onClick={() => {
+                if (isMobile()) {
+                    window.scrollTo({
+                        left: 0, 
+                        top: 720, 
+                        behavior: "smooth" 
+                    })                          
+                }
                 setchartteam(team)
                 if (validEvent(team)) {
                     setactiveindex(0)
